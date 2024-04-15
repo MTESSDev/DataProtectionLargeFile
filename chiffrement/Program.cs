@@ -66,6 +66,9 @@ public class CustomStream : Stream
 
         // Chiffrer et stocker la clé dans le flux
         byte[] protectedKey = _dataProtector.Protect(_encryptionKey);
+
+        if (protectedKey.Length != 132) throw new InvalidOperationException("La longeur du contenu protégé est invalide.");
+
         _underlyingStream.Write(protectedKey, 0, protectedKey.Length);
         _isWriting = true;
 
