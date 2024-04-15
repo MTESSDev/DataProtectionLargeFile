@@ -4,7 +4,6 @@ using System.Security.Cryptography;
 using System.Text;
 
 
-
 var serviceCollection = new ServiceCollection();
 serviceCollection.AddDataProtection()
     // point at a specific folder and use DPAPI to encrypt keys
@@ -15,9 +14,6 @@ var services = serviceCollection.BuildServiceProvider();
 // perform a protect operation to force the system to put at least
 // one key in the key ring
 services.GetDataProtector("Sample.KeyManager.v1").Protect("payload");
-
-
-
 
 // get a reference to the key manager
 var dataProtectionProvider = services.GetService<IDataProtectionProvider>()!;
