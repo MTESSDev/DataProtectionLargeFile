@@ -118,7 +118,11 @@ public class CustomStream : Stream
     public override long Position
     {
         get => _underlyingStream.Position;
-        set => _underlyingStream.Position = value;
+        set
+        {
+            _cryptoStream = new CryptoStream(_underlyingStream, _aes.CreateDecryptor(), CryptoStreamMode.Read);
+            _underlyingStream.Position = value < 132 ? 132 : value; // On empêche de lire en bas de 132 puisque c'est notre clé qui est située là
+        }
     }
 
     public override void Flush()
