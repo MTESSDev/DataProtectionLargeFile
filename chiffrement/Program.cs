@@ -154,17 +154,6 @@ public class CustomStream : Stream
         _cryptoStream.Write(buffer, offset, count);
     }
 
-    private byte[] GenerateEncryptionKey(int size)
-    {
-        // Générer une clé aléatoire
-        byte[] key = new byte[size]; // 256 bits
-        using (var rng = new RNGCryptoServiceProvider())
-        {
-            rng.GetBytes(key);
-        }
-        return key;
-    }
-
     protected override void Dispose(bool disposing)
     {
         if (disposing)
